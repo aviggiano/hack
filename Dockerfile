@@ -51,21 +51,22 @@ FROM echidna AS slither
 RUN pip3 --no-cache-dir install solc-select
 RUN solc-select install all && SOLC_VERSION=0.8.0 solc-select versions | head -n1 | xargs solc-select use
 
-RUN pip3 --no-cache-dir install slither-analyzer pyevmasm
+RUN apt-get install -y libasound2
+RUN pip3 --no-cache-dir install slither-analyzer pyevmasm pygame
 
-#############
-# manticore #
-#############
-FROM slither AS manticore
+# #############
+# # manticore #
+# #############
+# FROM slither AS manticore
 
-RUN pip3 --no-cache-dir install --upgrade manticore
+# RUN pip3 --no-cache-dir install --upgrade manticore
 
-###########
-# foundry #
-###########
-FROM manticore AS foundry
+# ###########
+# # foundry #
+# ###########
+# FROM slither AS foundry
 
-RUN curl -L https://foundry.paradigm.xyz | bash
-RUN . /root/.bashrc && foundryup
+# RUN curl -L https://foundry.paradigm.xyz | bash
+# RUN . /root/.bashrc && foundryup
 
 ENTRYPOINT ["/bin/bash"]
