@@ -21,6 +21,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libudev-dev \
     gpg-agent \
     vim \
+    less \
 && apt-get clean \
 && rm -rf /var/lib/apt/lists/*
 
@@ -51,7 +52,7 @@ FROM echidna AS slither
 RUN pip3 --no-cache-dir install solc-select
 RUN solc-select install all && SOLC_VERSION=0.8.0 solc-select versions | head -n1 | xargs solc-select use
 
-RUN apt-get install -y libasound2
+RUN apt-get update && apt-get install -y libasound2
 RUN pip3 --no-cache-dir install slither-analyzer pyevmasm pygame
 
 # #############
