@@ -56,19 +56,19 @@ RUN solc-select install all && SOLC_VERSION=0.8.0 solc-select versions | head -n
 RUN apt-get update && apt-get install -y libasound2
 RUN pip3 --no-cache-dir install slither-analyzer pyevmasm pygame
 
+###########
+# foundry #
+###########
+FROM slither AS foundry
+
+RUN curl -L https://foundry.paradigm.xyz | bash
+RUN . /root/.bashrc && foundryup
+
 # #############
 # # manticore #
 # #############
 # FROM slither AS manticore
 
 # RUN pip3 --no-cache-dir install --upgrade manticore
-
-# ###########
-# # foundry #
-# ###########
-# FROM slither AS foundry
-
-# RUN curl -L https://foundry.paradigm.xyz | bash
-# RUN . /root/.bashrc && foundryup
 
 ENTRYPOINT ["/bin/bash"]
